@@ -1,0 +1,8 @@
+<ng-container *ngIf="!(isLoginPage() || isHomePage() ||  isAdminPage())">
+    <app-nav-user></app-nav-user>
+ 
+    <!-- <app-footer></app-footer> -->
+  </ng-container>
+ 
+  <router-outlet></router-outlet>
+  
