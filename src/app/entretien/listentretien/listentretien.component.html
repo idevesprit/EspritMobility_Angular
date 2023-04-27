@@ -1,0 +1,48 @@
+
+
+<app-nav-universite></app-nav-universite>
+
+
+<div class="container" style="margin-left: 250px;margin-top: 50px">
+  <div class="col-md-12 col-12 col-sm-12">
+    <div class="card">
+      <div class="card-header" style="background: #4d5051">
+        <h4>Task Details</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <div *ngFor="let o of entretien">
+            <table class="table table-striped">
+              <tbody><tr>
+                <th class="text-center">
+
+                </th>
+                <th>date entretien</th>
+                <th>statutEntretien</th>
+
+                <th></th>
+              </tr>
+              <tr>
+                <td class="p-0 text-center">
+
+                </td>
+                <td>{{o.dateEntretien}}</td>
+                <td>
+                  {{o.statutEntretien}}
+                </td>
+                <td>
+                <td>
+                  <a routerLink="/addentretien" style="margin-left: 10px" class="btn btn-danger btn-action" data-toggle="tooltip" title="" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')" data-original-title="Delete"><i class="fas fa-plus" ></i></a>
+                </td>
+              </tr>
+              <tr>
+
+
+              </tbody></table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

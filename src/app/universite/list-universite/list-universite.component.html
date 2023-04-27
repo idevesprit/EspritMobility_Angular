@@ -1,0 +1,34 @@
+
+<app-nav-user></app-nav-user>
+<a routerLink="/adduniversite" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Add universite</a>
+<div *ngFor="let p of university">
+
+<div class="row g-2 justify-content-center">
+  <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="course-item bg-light">
+      <div class="position-relative overflow-hidden">
+        <img class="img-fluid" src="/assets/img/course-1.jpg" alt="">
+        <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+          <a routerLink="/details/{{p.idUniversite}}" class="flex-shrink-0 btn btn-sm btn-danger px-3 border-end" style="border-radius: 30px 0 0 30px;">details</a>
+          <a routerLink="/delete/{{p.idUniversite}}" class="flex-shrink-0 btn btn-sm btn-danger px-3" style="border-radius: 0 30px 30px 0;">delete</a>
+        </div>
+      </div>
+      <div class="text-center p-4 pb-0">
+        <h3 class="mb-0"> name :{{p.nomUniversite}}</h3>
+        <h3 class="mb-0">adress :{{p.adresseUniversite}}</h3>
+        <div class="mb-3">
+          <small class="fa fa-star text-danger"></small>
+          <small class="fa fa-star text-danger"></small>
+          <small class="fa fa-star text-danger"></small>
+          <small class="fa fa-star text-danger"></small>
+          <small class="fa fa-star text-danger"></small>
+          <small>(123)</small>
+        </div>
+        <h5 class="mb-4"> specialite :{{p.specialite}}</h5>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
