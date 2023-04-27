@@ -1,0 +1,81 @@
+
+
+<app-nav-universite></app-nav-universite>
+<div>
+<a routerLink="/addoffre" style="margin-left: 350px;margin-top: 20px"
+   class="btn btn-danger btn-action" data-toggle="tooltip" title="" [(ngModel)]="searchtext" ><i class="fas fa-plus" ></i></a>
+
+  <form class="d-none d-md-flex ms-4">
+    <input class="form-control bg-danger border-0" type="search" placeholder="Search" style="margin-right: 300px ; margin-left: 400px ; background: #fff3cd" >
+  </form>
+</div>
+<div *ngFor="let o of offre | filter:searchtext" >
+
+  <section style="margin-top: 10px;margin-left: 200px">
+    <div class="container py-2" >
+      <div class="row justify-content-center mb-3" >
+        <div class="col-md-12 col-xl-10" >
+          <div class="card shadow-0 border rounded-5">
+            <div class="card-body" style="background: #4d5051">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0" >
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src="/assets/img/cat-1.jpg " height="150"
+                         class="w-100"/>
+                    <a href="#!">
+                      <div *ngIf="o.statutOffre=='Cloturé'">
+                        <div class="hover-overlay"style="background-color: #0c4128;">
+                          <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                  <h5> {{o.titre}}</h5>
+                  <div class="d-flex flex-row">
+                    <div class="text-danger mb-1 me-2">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <span>310</span>
+                  </div>
+                  <div class="mt-1 mb-0 text-muted small">
+                    <span>{{o.typeOffre}}</span>
+                  </div>
+                  <p class="text-truncate mb-4 mb-md-0">
+                    {{o.description}}
+                  </p>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                  <div class="d-flex flex-row align-items-center mb-1">
+                    <h6 class="mb-1 me-1">Place disponible :{{o.nbrePlaceDispo}}</h6>
+
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-1">
+                    <div class="d-flex flex-row align-items-center mb-1">
+                      <h6 class="mb-1 me-1">Date fin :{{o.dateFinOffre}}</h6>
+                    </div>
+                  </div>
+                  <div *ngIf="o.statutOffre=='Cloturé'">
+                    <h6 class="text-danger">{{o.statutOffre}}</h6>
+                  </div>
+                  <div *ngIf="o.statutOffre=='EnCours'">
+                    <h6 class="text-success">{{o.statutOffre}}</h6>
+                  </div>
+                  <div class="d-flex flex-column mt-4">
+                    <a routerLink="/deleteoffre/{{o.idOffre}}" class="btn btn-primary btn-sm" type="button" >delete</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

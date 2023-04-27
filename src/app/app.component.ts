@@ -13,10 +13,13 @@ export class AppComponent {
     return this.router.url === '/home';
   }
   isLoginPage() {
-    return this.router.url === '/login';
+    return this.router.url === '/accueil';
   }
   isAdminPage() {
     return this.router.url === '/admin';
+  }
+  isuniversitePage() {
+    return this.router.url === '/universite','/ouroffre';
   }
 }
 
