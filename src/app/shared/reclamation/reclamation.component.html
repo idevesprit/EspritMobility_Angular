@@ -1,0 +1,161 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" style="color:white;">Reclamations</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="onOpenModal(null,'add')">Add Reclamation <span class="sr-only"></span></a>
+      </li>
+      <li>
+        <button class="btn btn-action" (click)="onLogOut()" >
+          <span>Logout</span>
+        </button>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+<div class="container" id="main-container">
+  <div class="row" >
+    <div *ngFor="let r of reclamations" class="col-md-6 col-xl-3">
+      <div class="card m-b-30">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Contenu : {{r?.contenu}}</li>
+          <li class="list-group-item"><i class="fa fa-phone float-right"></i>date de réclamation : {{r?.dateReclamation}}</li>
+          <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Type de réclamation : {{r?.typeReclamation}}</li>
+          <li class="list-group-item"><i class="fa fa-phone float-right"></i>Status de réclamation : {{r?.statutReclamation}}</li>
+        </ul>
+        <div class="card-body">
+          <div class="float-right btn-group btn-group-sm">
+            <a (click)="onOpenModal(r, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+            <a (click)="onOpenModal(r, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add Employee Modal -->
+  <div class="modal fade" id="addReclamationModal" tabindex="-1" role="dialog" aria-labelledby="addReclamationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addReclamationModalLabel">Add Reclamation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #addForm="ngForm" (ngSubmit)="onAddReclamation(addForm)">
+            <div class="form-group">
+              <label for="contenu">contenu</label>
+              <input type="text" ngModel name="contenu" class="form-control" id="contenu" placeholder="contenu" required>
+            </div>
+            <div class="form-group">
+              <label for="dateReclamation">date de reclamation</label>
+              <input type="date" ngModel name="dateReclamation" class="form-control" id="dateReclamation" placeholder="date_reclamation" required>
+            </div>
+            <div class="form-group">
+              <label for="typeReclamation">type de reclamation <span class="text-danger">*</span></label>
+              <select name="typeReclamation" ngModel id="typeReclamation" required class="form-control">
+                <option  value="Offre">Offre</option>
+                <option  value="Service">Service</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="statutReclamation">status de reclamation <span class="text-danger">*</span></label>
+              <select name="statutReclamation" ngModel id="statutReclamation" required class="form-control">
+                <option  value="Traité">Traité</option>
+                <option  value="Refusé">Refusé</option>
+                <option  value="EnCoursDeTraitement">EnCoursDeTraitement</option>
+                <option  value="Satisfait">Satisfait</option>
+                <option  value="Décu">Décu</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="add-reclamation-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal fade" id="updateReclamationModal" tabindex="-1" role="dialog" aria-labelledby="updateReclamationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateReclamationModalLabel">Edit Reclamation </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #editForm="ngForm">
+            <div class="form-group">
+              <label for="contenu">contenu</label>
+              <input type="text" ngModel="{{editReclamation?.contenu}}" name="contenu" class="form-control" id="contenu" aria-describedby="emailHelp" placeholder="contenu">
+            </div>
+            <input type="hidden" ngModel="{{editReclamation?.idReclamation}}" name="idReclamation" class="form-control" id="idReclamation" placeholder="id">
+            <div class="form-group">
+              <label for="dateReclamation">date de reclamation</label>
+              <input type="date" ngModel="{{editReclamation?.dateReclamation}}" name="dateReclamation" class="form-control" id="dateReclamation" placeholder="date_reclamation">
+            </div>
+            <div class="form-group">
+              <label for="typeReclamation">type de reclamation <span class="text-danger">*</span></label>
+              <select name="typeReclamation" ngModel="{{editReclamation?.typeReclamation}}" id="typeReclamation" required class="form-control">
+                <option value="Offre">Offre</option>
+                <option value="Service">Service</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="statutReclamation">status de reclamation <span class="text-danger">*</span></label>
+              <select name="statutReclamation" ngModel="{{editReclamation?.statutReclamation}}" id="statutReclamation" required class="form-control">
+                <option value="Traité">Traité</option>
+                <option value="Refusé">Refusé</option>
+                <option value="EnCoursDeTraitement">EnCoursDeTraitement</option>
+                <option value="Satisfait">Satisfait</option>
+                <option value="Décu">Décu</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+              <button (click)="onUpdateReclamation(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteReclamationModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModelLabel">Delete reclamation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete employee ?</p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button (click)="onDeleteReclamation(deleteReclamation?.idReclamation)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Notification for no employees -->
+<div *ngIf="reclamations?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO RECLAMATION!</h4>
+    <p>No reclamations were found.</p>
+  </div>
+</div>

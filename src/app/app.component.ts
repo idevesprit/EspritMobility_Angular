@@ -13,13 +13,25 @@ export class AppComponent {
     return this.router.url === '/home';
   }
   isLoginPage() {
-    return this.router.url === '/accueil';
+    return this.router.url === '/login';
   }
   isAdminPage() {
     return this.router.url === '/admin';
   }
-  isuniversitePage() {
-    return this.router.url === '/universite','/ouroffre';
+  isRegisterPage() {
+    return this.router.url === '/register';
+  }
+  isProfilePage() {
+    return this.router.url === '/profile';
+  }
+  isVerificationMailPage() {
+    return this.router.url === '/verificationmail';
+  }
+  isLockScreenPage() {
+    return this.router.url === '/lockscreen';
+  }
+  isResetPasswordPage() {
+    return this.router.url === '/resetpassword';
   }
 }
 
