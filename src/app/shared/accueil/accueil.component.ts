@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {UniversiteService} from "../../universite/service/universite.service";
 
 @Component({
   selector: 'app-accueil',
@@ -7,12 +6,10 @@ import {UniversiteService} from "../../universite/service/universite.service";
   styleUrls: ['./accueil.component.css']
 })
 export class AccueilComponent implements OnInit {
-  university:any
-  constructor(private s:UniversiteService) { }
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.s.getuniversite().subscribe(r=>{this.university=r})
-
   }
 
 }

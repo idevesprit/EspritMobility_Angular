@@ -8,25 +8,21 @@ import { NavAdminComponent } from './shared/nav-admin/nav-admin.component';
 import { NavUserComponent } from './shared/nav-user/nav-user.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { HomeComponent } from './shared/home/home.component';
 import { LoginComponent } from './shared/login/login.component';
 import { AccueilComponent } from './shared/accueil/accueil.component';
-import {ListUniversiteComponent} from "./universite/list-universite/list-universite.component";
-import {AddUniversiteComponent} from "./universite/add-universite/add-universite.component";
-import { DeleteComponent } from './universite/delete/delete.component';
-import { DetailsComponent } from './universite/details/details.component';
-import { UpdateComponent } from './universite/update/update.component';
-import { OffreUniversityComponent } from './offre/offre-university/offre-university.component';
-import { NavUniversiteComponent } from './universite/nav-universite/nav-universite.component';
-import { OurOffreComponent } from './universite/our-offre/our-offre.component';
-import { CandidatureComponent } from './universite/candidature/candidature.component';
-import { EntretienComponent } from './entretien/entretien/entretien.component';
-import { DeleteoffreComponent } from './offre/deleteoffre/deleteoffre.component';
-import { ListentretienComponent } from './entretien/listentretien/listentretien.component';
-import { AddeoffreComponent } from './offre/addeoffre/addeoffre.component';
-import { NotfoundComponent } from './shared/notfound/notfound.component';
-import {Ng2SearchPipeModule} from "ng2-search-filter";
+import { LockScreenComponent } from './shared/lock-screen/lock-screen.component';
+import { RegisterComponent } from './shared/register/register.component';
+import { ProfileComponent } from './shared/profile/profile.component';
+import { VerificationMailComponent } from './shared/verification-mail/verification-mail.component';
+import { ReclamationComponent } from './shared/reclamation/reclamation.component';
+import { ResetpasswordComponent } from './shared/resetpassword/resetpassword.component';
+import {AuthenticationGuard} from "./guard/authentication.guard";
+import {AuthenticationService} from "./services/authentication.service";
+import {AuthInterceptor} from "./interceptor/auth.interceptor";
+import {NotificationService} from "./services/notification.service";
+import {NotificationModule} from "./notification.module";
 
 @NgModule({
   declarations: [
@@ -37,29 +33,24 @@ import {Ng2SearchPipeModule} from "ng2-search-filter";
     FooterComponent,
     LoginComponent,
     AccueilComponent,
-    ListUniversiteComponent,
-    AddUniversiteComponent,
-    DeleteComponent,
-    DetailsComponent,
-    UpdateComponent,
-    OffreUniversityComponent,
-    NavUniversiteComponent,
-    OurOffreComponent,
-    CandidatureComponent,
-    EntretienComponent,
-    DeleteoffreComponent,
-    ListentretienComponent,
-    AddeoffreComponent,
-    NotfoundComponent
+    LockScreenComponent,
+    RegisterComponent,
+    ProfileComponent,
+    VerificationMailComponent,
+    ReclamationComponent,
+    ResetpasswordComponent
 
   ],
   imports: [
     BrowserModule,
-    Ng2SearchPipeModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule],
-  providers: [],
+    HttpClientModule,
+    NotificationModule
+  ],
+  providers: [NotificationService, AuthenticationGuard, AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
